@@ -80,17 +80,17 @@ public class LatinKeyboardView extends KeyboardView {
                     canvas.drawText("2", key.x + (key.width - 25), key.y + 40, paint);
                 } else if (key.label.equals("v")) {
                     canvas.drawText("3", key.x + (key.width - 25), key.y + 40, paint);
-                } else if (key.label.equals("x")) {
-                    canvas.drawText("4", key.x + (key.width - 25), key.y + 40, paint);
                 } else if (key.label.equals("é")) {
-                    canvas.drawText("5", key.x + (key.width - 25), key.y + 40, paint);
+                    canvas.drawText("4", key.x + (key.width - 25), key.y + 40, paint);
                 } else if (key.label.equals("ŕ")) {
-                    canvas.drawText("6", key.x + (key.width - 25), key.y + 40, paint);
+                    canvas.drawText("5", key.x + (key.width - 25), key.y + 40, paint);
                 } else if (key.label.equals("ŧ")) {
-                    canvas.drawText("7", key.x + (key.width - 25), key.y + 40, paint);
+                    canvas.drawText("6", key.x + (key.width - 25), key.y + 40, paint);
                 } else if (key.label.equals("ǵ")) {
-                    canvas.drawText("8", key.x + (key.width - 25), key.y + 40, paint);
+                    canvas.drawText("7", key.x + (key.width - 25), key.y + 40, paint);
                 } else if (key.label.equals("ú")) {
+                    canvas.drawText("8", key.x + (key.width - 25), key.y + 40, paint);
+                } else if (key.label.equals("í")) {
                     canvas.drawText("9", key.x + (key.width - 25), key.y + 40, paint);
                 } else if (key.label.equals("ó")) {
                     canvas.drawText("0", key.x + (key.width - 25), key.y + 40, paint);

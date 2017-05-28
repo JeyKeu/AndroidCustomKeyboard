@@ -40,33 +40,33 @@
             android:popupCharacters="3"
             android:popupKeyboard="@xml/keyboard_popup_template" />
         <Key
-            android:codes="120"
-            android:keyLabel="x"
-            android:popupCharacters="4"
-            android:popupKeyboard="@xml/keyboard_popup_template" />
-        <Key
             android:codes="0xE9"
             android:keyLabel="é"
-            android:popupCharacters="5"
+            android:popupCharacters="4"
             android:popupKeyboard="@xml/keyboard_popup_template" />
         <Key
             android:codes="0x155"
             android:keyLabel="ŕ"
-            android:popupCharacters="6"
+            android:popupCharacters="5"
             android:popupKeyboard="@xml/keyboard_popup_template" />
         <Key
             android:codes="0x167"
             android:keyLabel="ŧ"
-            android:popupCharacters="7"
+            android:popupCharacters="6"
             android:popupKeyboard="@xml/keyboard_popup_template" />
         <Key
             android:codes="0x1F5"
             android:keyLabel="ǵ"
-            android:popupCharacters="8"
+            android:popupCharacters="7"
             android:popupKeyboard="@xml/keyboard_popup_template" />
         <Key
             android:codes="0xFA"
             android:keyLabel="ú"
+            android:popupCharacters="8"
+            android:popupKeyboard="@xml/keyboard_popup_template" />
+        <Key
+            android:codes="0xED"
+            android:keyLabel="í"
             android:popupCharacters="9"
             android:popupKeyboard="@xml/keyboard_popup_template" />
         <Key
