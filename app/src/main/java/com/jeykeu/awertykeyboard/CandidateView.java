@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.blackcj.customkeyboard;
+package com.jeykeu.awertykeyboard;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -25,6 +25,8 @@ import android.graphics.drawable.Drawable;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.jeykeu.awertykeyboard.R;
 
 import java.util.ArrayList;
 import java.util.List;

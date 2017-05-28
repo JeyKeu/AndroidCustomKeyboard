@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.blackcj.customkeyboard;
+package com.jeykeu.awertykeyboard;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -24,7 +24,6 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.Keyboard.Key;
 import android.inputmethodservice.KeyboardView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.inputmethod.InputMethodSubtype;
 
 import java.util.List;
@@ -58,8 +57,8 @@ public class LatinKeyboardView extends KeyboardView {
     }
 
     void setSubtypeOnSpaceKey(final InputMethodSubtype subtype) {
-        final LatinKeyboard keyboard = (LatinKeyboard)getKeyboard();
-        //keyboard.setSpaceIcon(getResources().getDrawable(subtype.getIconResId()));
+        final LatinKeyboard keyboard = (LatinKeyboard) getKeyboard();
+        keyboard.setSpaceIcon(getResources().getDrawable(subtype.getIconResId()));
         invalidateAllKeys();
     }
 
@@ -73,18 +72,28 @@ public class LatinKeyboardView extends KeyboardView {
         paint.setColor(Color.LTGRAY);
 
         List<Key> keys = getKeyboard().getKeys();
-        for(Key key: keys) {
-            if(key.label != null) {
-                if (key.label.equals("q")) {
+        for (Key key : keys) {
+            if (key.label != null) {
+                if (key.label.equals("ź")) {
                     canvas.drawText("1", key.x + (key.width - 25), key.y + 40, paint);
-                } else if (key.label.equals("w")) {
+                } else if (key.label.equals("f")) {
                     canvas.drawText("2", key.x + (key.width - 25), key.y + 40, paint);
-                } else if (key.label.equals("e")) {
+                } else if (key.label.equals("v")) {
                     canvas.drawText("3", key.x + (key.width - 25), key.y + 40, paint);
-                } else if (key.label.equals("r")) {
+                } else if (key.label.equals("x")) {
                     canvas.drawText("4", key.x + (key.width - 25), key.y + 40, paint);
-                } else if (key.label.equals("t")) {
+                } else if (key.label.equals("é")) {
                     canvas.drawText("5", key.x + (key.width - 25), key.y + 40, paint);
+                } else if (key.label.equals("ŕ")) {
+                    canvas.drawText("6", key.x + (key.width - 25), key.y + 40, paint);
+                } else if (key.label.equals("ŧ")) {
+                    canvas.drawText("7", key.x + (key.width - 25), key.y + 40, paint);
+                } else if (key.label.equals("ǵ")) {
+                    canvas.drawText("8", key.x + (key.width - 25), key.y + 40, paint);
+                } else if (key.label.equals("ú")) {
+                    canvas.drawText("9", key.x + (key.width - 25), key.y + 40, paint);
+                } else if (key.label.equals("ó")) {
+                    canvas.drawText("0", key.x + (key.width - 25), key.y + 40, paint);
                 }
             }
 

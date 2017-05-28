@@ -1,4 +1,4 @@
-package com.blackcj.customkeyboard;
+package com.jeykeu.awertykeyboard;
 
 import org.junit.Test;
 

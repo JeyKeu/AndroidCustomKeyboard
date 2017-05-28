@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.blackcj.customkeyboard;
+package com.jeykeu.awertykeyboard;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -23,6 +23,8 @@ import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+
+import com.jeykeu.awertykeyboard.R;
 
 public class LatinKeyboard extends Keyboard {
 
