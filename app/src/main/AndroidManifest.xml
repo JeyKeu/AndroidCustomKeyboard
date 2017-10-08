@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jeykeu.awertykeyboard">
-
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"></uses-permission>
     <application
         android:label="@string/ime_name">
         <activity android:name="com.jeykeu.awertykeyboard.ImePreferences" android:label="@string/settings_name">

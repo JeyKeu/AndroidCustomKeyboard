@@ -22,9 +22,6 @@ import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-
-import com.jeykeu.awertykeyboard.R;
 
 public class LatinKeyboard extends Keyboard {
 
@@ -37,7 +34,7 @@ public class LatinKeyboard extends Keyboard {
     private Key mModeChangeKey;
     /**
      * Stores the current state of the language switch key (a.k.a. globe key). This should be
-     * visible while {@link InputMethodManager#shouldOfferSwitchingToNextInputMethod(IBinder)}
+     * visible while {InputMethodManager#shouldOfferSwitchingToNextInputMethod(IBinder)}
      * returns true. When this key becomes invisible, its width will be shrunk to zero.
      */
     private Key mLanguageSwitchKey;
@@ -134,7 +131,7 @@ public class LatinKeyboard extends Keyboard {
                 mEnterKey.label = res.getText(R.string.label_send_key);
                 break;
             default:
-                mEnterKey.icon = res.getDrawable(R.drawable.sym_keyboard_return);
+                mEnterKey.icon = res.getDrawable(R.drawable.ic_kbd_enter);
                 mEnterKey.label = null;
                 break;
         }

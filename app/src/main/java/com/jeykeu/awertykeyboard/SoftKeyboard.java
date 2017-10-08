@@ -37,19 +37,18 @@ import android.view.inputmethod.InputMethodSubtype;
 import android.view.textservice.SentenceSuggestionsInfo;
 import android.view.textservice.SpellCheckerSession;
 import android.view.textservice.SuggestionsInfo;
-import android.view.textservice.TextInfo;
 import android.view.textservice.TextServicesManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Example of writing an input method for a soft keyboard.  This code is
- * focused on simplicity over completeness, so it should in no way be considered
- * to be a complete soft keyboard implementation.  Its purpose is to provide
- * a basic example for how you would get started writing an input method, to
- * be fleshed out as appropriate.
+ * AWERTY Keyboard
+ * This is project is based on the official ime demo implementation and customised to our needs
+ *
+ * @author Junaid Qadir
  */
+
 public class SoftKeyboard extends InputMethodService
         implements KeyboardView.OnKeyboardActionListener, SpellCheckerSession.SpellCheckerSessionListener {
     static final boolean DEBUG = false;
@@ -82,9 +81,12 @@ public class SoftKeyboard extends InputMethodService
     private LatinKeyboard mSymbolsShiftedKeyboard;
     private LatinKeyboard mQwertyKeyboard;
     private LatinKeyboard mAwertyKeyboard;
+    private LatinKeyboard mAwertyPcKeyboard;
+    private LatinKeyboard mDialPadKeyboard;
 
     private LatinKeyboard mCurKeyboard;
     private LatinKeyboard mDefaultKeyboard;
+
 
     private String mWordSeparators;
 
@@ -124,6 +126,7 @@ public class SoftKeyboard extends InputMethodService
         mQwertyKeyboard = new LatinKeyboard(this, R.xml.qwerty);
         mSymbolsKeyboard = new LatinKeyboard(this, R.xml.symbols);
         mSymbolsShiftedKeyboard = new LatinKeyboard(this, R.xml.symbols_shift);
+        mDialPadKeyboard = new LatinKeyboard(this, R.xml.dial_pad);
         mDefaultKeyboard = mAwertyKeyboard;
 
     }
@@ -139,17 +142,30 @@ public class SoftKeyboard extends InputMethodService
         mInputView = (LatinKeyboardView) getLayoutInflater().inflate(
                 R.layout.input, null);
         mInputView.setOnKeyboardActionListener(this);
+
         mInputView.setPreviewEnabled(false);
         setLatinKeyboard(mDefaultKeyboard);
+        InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
+        switch (subtype.getLocale()) {
+            case "bal":
+                setLatinKeyboard(mAwertyKeyboard);
+                break;
+            case "en_Us":
+                setLatinKeyboard(mQwertyKeyboard);
+                break;
+        }
+
         return mInputView;
     }
 
+
     private void setLatinKeyboard(LatinKeyboard nextKeyboard) {
+        Log.d("SoftKeyboard", "setLatinKeyboard");
+
         final boolean shouldSupportLanguageSwitchKey =
                 mInputMethodManager.shouldOfferSwitchingToNextInputMethod(getToken());
         nextKeyboard.setLanguageSwitchKeyVisibility(shouldSupportLanguageSwitchKey);
         mInputView.setKeyboard(nextKeyboard);
-
     }
 
     /**
@@ -190,8 +206,9 @@ public class SoftKeyboard extends InputMethodService
         // We are now going to initialize our state based on the type of
         // text being edited.
         switch (attribute.inputType & InputType.TYPE_MASK_CLASS) {
-            case InputType.TYPE_CLASS_NUMBER:
             case InputType.TYPE_CLASS_DATETIME:
+            case InputType.TYPE_CLASS_NUMBER:
+
                 // Numbers and dates default to the symbols keyboard, with
                 // no extra features.
                 mCurKeyboard = mSymbolsKeyboard;
@@ -200,7 +217,7 @@ public class SoftKeyboard extends InputMethodService
             case InputType.TYPE_CLASS_PHONE:
                 // Phones will also default to the symbols keyboard, though
                 // often you will want to have a dedicated phone keyboard.
-                mCurKeyboard = mSymbolsKeyboard;
+                mCurKeyboard = mDialPadKeyboard;
                 break;
 
             case InputType.TYPE_CLASS_TEXT:
@@ -249,12 +266,13 @@ public class SoftKeyboard extends InputMethodService
                 // For all unknown input types, default to the alphabetic
                 // keyboard with no special features.
                 mCurKeyboard = mDefaultKeyboard;
-                updateShiftKeyState(attribute);
         }
 
         // Update the label on the enter key, depending on what the application
         // says it will do.
         mCurKeyboard.setImeOptions(getResources(), attribute.imeOptions);
+        updateShiftKeyState(attribute);
+
     }
 
     /**
@@ -286,13 +304,26 @@ public class SoftKeyboard extends InputMethodService
         super.onStartInputView(attribute, restarting);
         // Apply the selected keyboard to the input view.
         setLatinKeyboard(mCurKeyboard);
-        mInputView.closing();
         final InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
         mInputView.setSubtypeOnSpaceKey(subtype);
+        mInputView.closing();
+
     }
 
     @Override
     public void onCurrentInputMethodSubtypeChanged(InputMethodSubtype subtype) {
+
+
+        Log.d("subtype change:", subtype.getLocale());
+
+        switch (subtype.getLocale()) {
+            case "bal":
+                setLatinKeyboard(mAwertyKeyboard);
+                break;
+            case "en_Us":
+                setLatinKeyboard(mQwertyKeyboard);
+                break;
+        }
         mInputView.setSubtypeOnSpaceKey(subtype);
     }
 
@@ -467,7 +498,7 @@ public class SoftKeyboard extends InputMethodService
             }
         }
 
-
+        Log.w("ONKeyUp", Integer.toString(keyCode));
         return super.onKeyUp(keyCode, event);
     }
 
@@ -495,6 +526,7 @@ public class SoftKeyboard extends InputMethodService
                 caps = getCurrentInputConnection().getCursorCapsMode(attr.inputType);
             }
             mInputView.setShifted(mCapsLock || caps != 0);
+            updateShiftIcon();
         }
     }
 
@@ -540,7 +572,10 @@ public class SoftKeyboard extends InputMethodService
     // Implementation of KeyboardViewListener
 
     public void onKey(int primaryCode, int[] keyCodes) {
-        Log.d("Test", "KEYCODE: " + primaryCode);
+        if (mInputView.popup != null && mInputView.popup.isShowing()) {
+            mInputView.popup.dismiss();
+        }
+        Log.d("Softkeyboard onKey", "KEYCODE: " + primaryCode);
         if (isWordSeparator(primaryCode)) {
             // Handle separator
             if (mComposing.length() > 0) {
@@ -560,10 +595,14 @@ public class SoftKeyboard extends InputMethodService
             return;
         } else if (primaryCode == LatinKeyboardView.KEYCODE_OPTIONS) {
             // Show a menu or somethin'
-        } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
-                && mInputView != null) {
+
+        } else if (primaryCode == LatinKeyboardView.KEYCODE_DIAL_PAD && mInputView != null) {
+            setLatinKeyboard(mDialPadKeyboard);
+
+        } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE && mInputView != null) {
+            Log.d("onKey", "KEYCODE_MODE_CHANGE");
             Keyboard current = mInputView.getKeyboard();
-            if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard) {
+            if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard || current == mDialPadKeyboard) {
                 setLatinKeyboard(mDefaultKeyboard);
             } else {
                 setLatinKeyboard(mSymbolsKeyboard);
@@ -597,7 +636,7 @@ public class SoftKeyboard extends InputMethodService
                 ArrayList<String> list = new ArrayList<String>();
                 //list.add(mComposing.toString());
                 Log.d("SoftKeyboard", "REQUESTING: " + mComposing.toString());
-                mScs.getSentenceSuggestions(new TextInfo[]{new TextInfo(mComposing.toString())}, 5);
+                //-=mScs.getSentenceSuggestions(new TextInfo[]{new TextInfo(mComposing.toString())}, 5);
                 setSuggestions(list, true, true);
             } else {
                 setSuggestions(null, false, false);
@@ -644,7 +683,9 @@ public class SoftKeyboard extends InputMethodService
             // Alphabet keyboard
             checkToggleCapsLock();
             mInputView.setShifted(mCapsLock || !mInputView.isShifted());
-        } else if (currentKeyboard == mSymbolsKeyboard) {
+            Boolean s = mCapsLock || !mInputView.isShifted();
+            Log.w("IS Shifted", Boolean.toString(s));
+        } else if (currentKeyboard == mSymbolsKeyboard || currentKeyboard == mDialPadKeyboard) {
             mSymbolsKeyboard.setShifted(true);
             setLatinKeyboard(mSymbolsShiftedKeyboard);
             mSymbolsShiftedKeyboard.setShifted(true);
@@ -652,6 +693,22 @@ public class SoftKeyboard extends InputMethodService
             mSymbolsShiftedKeyboard.setShifted(false);
             setLatinKeyboard(mSymbolsKeyboard);
             mSymbolsKeyboard.setShifted(false);
+        }
+        updateShiftIcon();
+    }
+
+    private void updateShiftIcon() {
+        List<Keyboard.Key> keys = mCurKeyboard.getKeys();
+        int shiftKey = mCurKeyboard.getShiftKeyIndex();
+        if (mCapsLock) {
+            Log.w("Shift", "ON");
+            keys.get(shiftKey).icon = getResources().getDrawable(R.drawable.ic_kbd_shift_lock);
+        } else if (mInputView.isShifted()) {
+            Log.w("Shift", "ON");
+            keys.get(shiftKey).icon = getResources().getDrawable(R.drawable.ic_kbd_shift_on);
+        } else {
+            Log.w("shift", "OFF");
+            keys.get(shiftKey).icon = getResources().getDrawable(R.drawable.ic_kbd_shift);
         }
     }
 
@@ -691,7 +748,10 @@ public class SoftKeyboard extends InputMethodService
     }
 
     private void handleLanguageSwitch() {
-        mInputMethodManager.switchToNextInputMethod(getToken(), false /* onlyCurrentIme */);
+        //mInputMethodManager.switchToNextInputMethod(getToken(), false /* onlyCurrentIme */);
+        InputMethodManager imeManager = (InputMethodManager) getApplicationContext().getSystemService(INPUT_METHOD_SERVICE);
+        imeManager.showInputMethodPicker();
+        mInputView.invalidateAllKeys();
     }
 
     private void checkToggleCapsLock() {
@@ -700,8 +760,10 @@ public class SoftKeyboard extends InputMethodService
             mCapsLock = !mCapsLock;
             mLastShiftTime = 0;
         } else {
+            mCapsLock = false;
             mLastShiftTime = now;
         }
+        Log.w("checkToggleCapsLock: ", Boolean.toString(mCapsLock));
     }
 
     private String getWordSeparators() {
@@ -748,6 +810,7 @@ public class SoftKeyboard extends InputMethodService
         handleBackspace();
     }
 
+
     public void swipeDown() {
         handleClose();
     }
@@ -755,13 +818,19 @@ public class SoftKeyboard extends InputMethodService
     public void swipeUp() {
     }
 
+    @Override
     public void onPress(int primaryCode) {
 
     }
 
+    @Override
     public void onRelease(int primaryCode) {
+        mInputView.setPreviewEnabled(false);
+        Log.w("popupkey", Integer.toString(primaryCode));
 
+//        myPopupWindow.dismiss();
     }
+
 
     /**
      * http://www.tutorialspoint.com/android/android_spelling_checker.htm

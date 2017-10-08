@@ -19,7 +19,7 @@
 -->
 <resources>
     <color name="colorPrimary">#000</color>
-    <color name="colorPrimaryDark">#000</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#3F51B5</color>
     <color name="candidate_normal">#FF000000</color>
     <color name="candidate_recommended">#000000</color>

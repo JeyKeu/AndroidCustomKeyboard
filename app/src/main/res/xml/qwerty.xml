@@ -39,8 +39,7 @@
     
     <Row>
         <Key android:codes="97" android:keyLabel="a" android:horizontalGap="5%p" 
-                android:keyEdgeFlags="left" android:popupKeyboard="@xml/keyboard_popup_template"
-            android:popupCharacters="áăä"/>
+                android:keyEdgeFlags="left" />
         <Key android:codes="115" android:keyLabel="s"/>
         <Key android:codes="100" android:keyLabel="d"/>
         <Key android:codes="102" android:keyLabel="f"/>
@@ -52,7 +51,7 @@
     </Row>
     
     <Row>
-        <Key android:codes="-1" android:keyIcon="@drawable/sym_keyboard_shift2"
+        <Key android:codes="-1" android:keyIcon="@drawable/ic_kbd_shift"
                 android:keyWidth="15%p" android:isModifier="true"
                 android:isSticky="true" android:keyEdgeFlags="left"/>
         <Key android:codes="122" android:keyLabel="z"/>
@@ -62,7 +61,7 @@
         <Key android:codes="98" android:keyLabel="b"/>
         <Key android:codes="110" android:keyLabel="n"/>
         <Key android:codes="109" android:keyLabel="m"/>
-        <Key android:codes="-5" android:keyIcon="@drawable/sym_keyboard_delete" 
+        <Key android:codes="-5" android:keyIcon="@drawable/ic_kbd_backspace"
                 android:keyWidth="15%p" android:keyEdgeFlags="right"
                 android:isRepeatable="true"/>
     </Row>
@@ -70,18 +69,18 @@
     <Row android:rowEdgeFlags="bottom">
         <Key android:codes="-3" android:keyIcon="@drawable/sym_keyboard_done" 
                 android:keyWidth="15%p" android:keyEdgeFlags="left"/>
-        <Key android:codes="-2" android:keyLabel="123" android:keyWidth="10%p"/>
         <!--
             android:codes: -101 is not a framework-defined key code but a key code that is
             privately defined in com.example.android.softkeyboard.LatinKeyboardView.
         -->
-        <Key android:codes="-101" android:keyIcon="@drawable/sym_keyboard_language_switch"
-                android:keyWidth="10%p"/>
-        <Key android:codes="32" android:keyIcon="@drawable/sym_keyboard_space" 
+        <Key android:codes="-101" android:keyIcon="@drawable/ic_kbd_choose_ime"
+            android:keyWidth="10%p"/>
+        <Key android:codes="-2" android:keyLabel="123" android:keyWidth="10%p"/>
+        <Key android:codes="32" android:keyIcon="@drawable/ic_kbd_space"
                 android:keyWidth="30%p" android:isRepeatable="true"/>
         <Key android:codes="46,44" android:keyLabel=". ,"
                 android:keyWidth="15%p" android:popupCharacters=".,?!#@" android:popupKeyboard="@xml/keyboard_popup_template"/>
-        <Key android:codes="10" android:keyIcon="@drawable/sym_keyboard_return" 
+        <Key android:codes="10" android:keyIcon="@drawable/ic_kbd_enter"
                 android:keyWidth="20%p" android:keyEdgeFlags="right"/>
     </Row>
 </Keyboard>

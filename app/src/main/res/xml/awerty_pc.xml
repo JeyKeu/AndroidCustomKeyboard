@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+/* 
+**
+** Copyright 2008, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License"); 
+** you may not use this file except in compliance with the License. 
+** You may obtain a copy of the License at 
+**
+**     http://www.apache.org/licenses/LICENSE-2.0 
+**
+** Unless required by applicable law or agreed to in writing, software 
+** distributed under the License is distributed on an "AS IS" BASIS, 
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+** See the License for the specific language governing permissions and 
+** limitations under the License.
+*/
+-->
+
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:horizontalGap="0px"
+    android:keyHeight="@dimen/key_height"
+    android:keyWidth="10%p"
+    android:verticalGap="0px">
+    <Row>
+        <Key
+            android:codes="0x17A"
+            android:keyEdgeFlags="left"
+            android:keyLabel="ź" />
+        <Key
+            android:codes="102"
+            android:keyLabel="f"
+            android:popupCharacters="1"
+            android:popupKeyboard="@xml/keyboard_popup_template" />
+        <Key
+            android:codes="118"
+            android:keyLabel="v"
+            android:popupCharacters="2"
+            android:popupKeyboard="@xml/keyboard_popup_template" />
+        <Key
+            android:codes="120"
+            android:keyLabel="x"
+            android:popupCharacters="3"
+            android:popupKeyboard="@xml/keyboard_popup_template"  />
+        <Key
+            android:codes="0xE9"
+            android:keyLabel="é"
+            android:popupCharacters="4"
+            android:popupKeyboard="@xml/keyboard_popup_template" />
+        <Key
+            android:codes="0x155"
+            android:keyLabel="ŕ"
+            android:popupCharacters="5"
+            android:popupKeyboard="@xml/keyboard_popup_template" />
+        <Key
+            android:codes="0x167"
+            android:keyLabel="ŧ"
+            android:popupCharacters="6"
+            android:popupKeyboard="@xml/keyboard_popup_template" />
+        <Key
+            android:codes="0x1F5"
+            android:keyLabel="ǵ"
+            android:popupCharacters="7"
+            android:popupKeyboard="@xml/keyboard_popup_template" />
+        <Key
+            android:codes="0xFA"
+            android:keyLabel="ú"
+            android:popupCharacters="8"
+            android:popupKeyboard="@xml/keyboard_popup_template" />
+        <Key
+            android:codes="0xED"
+            android:keyLabel="í"
+            android:popupCharacters="9"
+            android:popupKeyboard="@xml/keyboard_popup_template" />
+        <Key
+            android:codes="0xF3"
+            android:keyEdgeFlags="right"
+            android:keyLabel="ó"
+            android:popupCharacters="0"
+            android:popupKeyboard="@xml/keyboard_popup_template" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="0xE1"
+            android:keyEdgeFlags="left"
+            android:keyLabel="á" />
+        <Key
+            android:codes="119"
+            android:keyLabel="w" />
+        <Key
+            android:codes="101"
+            android:keyLabel="e" />
+        <Key
+            android:codes="114"
+            android:keyLabel="r" />
+        <Key
+            android:codes="116"
+            android:keyLabel="t" />
+        <Key
+            android:codes="121"
+            android:keyLabel="y" />
+        <Key
+            android:codes="117"
+            android:keyLabel="u" />
+        <Key
+            android:codes="105"
+            android:keyLabel="i" />
+        <Key
+            android:codes="111"
+            android:keyLabel="o" />
+        <Key
+            android:codes="112"
+            android:keyEdgeFlags="right"
+            android:keyLabel="p" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="97"
+            android:keyEdgeFlags="left"
+            android:keyLabel="a" />
+        <Key
+            android:codes="115"
+            android:keyLabel="s" />
+        <Key
+            android:codes="100"
+            android:keyLabel="d" />
+        <Key
+            android:codes="0x111"
+            android:keyLabel="đ" />
+        <Key
+            android:codes="103"
+            android:keyLabel="g" />
+        <Key
+            android:codes="104"
+            android:keyLabel="h" />
+        <Key
+            android:codes="106"
+            android:keyLabel="j" />
+        <Key
+            android:codes="107"
+            android:keyLabel="k" />
+        <Key
+            android:codes="108"
+            android:keyLabel="l" />
+        <Key
+            android:codes="0x1E13"
+            android:keyLabel="ḓ" />
+        <Key
+            android:codes="0x1E71"
+            android:keyEdgeFlags="right"
+            android:keyLabel="ṱ" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="-1"
+            android:isModifier="true"
+            android:isSticky="true"
+            android:keyEdgeFlags="left"
+            android:keyIcon="@drawable/ic_kbd_shift"
+            android:keyWidth="15%p" />
+        <Key
+            android:codes="122"
+            android:keyLabel="z" />
+        <Key
+            android:codes="0x15B"
+            android:keyLabel="ś" />
+        <Key
+            android:codes="99"
+            android:keyLabel="c" />
+        <Key
+            android:codes="0x144"
+            android:keyLabel="ń" />
+        <Key
+            android:codes="98"
+            android:keyLabel="b" />
+        <Key
+            android:codes="110"
+            android:keyLabel="n" />
+        <Key
+            android:codes="109"
+            android:keyLabel="m" />
+        <Key
+            android:codes="-5"
+            android:isRepeatable="true"
+            android:keyEdgeFlags="right"
+            android:keyIcon="@drawable/ic_kbd_backspace"
+            android:keyWidth="15%p" />
+    </Row>
+
+    <Row android:rowEdgeFlags="bottom">
+        <Key
+            android:codes="-3"
+            android:isRepeatable="true"
+            android:keyEdgeFlags="left"
+            android:keyIcon="@drawable/sym_keyboard_done"
+            android:keyWidth="15%p" />
+        <!--
+        android:codes: -101 is not a framework-defined key code but a key code that is
+        privately defined in com.example.android.softkeyboard.LatinKeyboardView.
+        -->
+        <Key
+            android:codes="-101"
+            android:isRepeatable="true"
+            android:keyIcon="@drawable/ic_kbd_choose_ime"
+            android:keyWidth="15%p" />
+        <Key
+            android:codes="-2"
+            android:isRepeatable="true"
+            android:keyLabel="123"
+            android:keyWidth="15%p" />
+
+        <Key
+            android:codes="-102"
+            android:isRepeatable="true"
+            android:keyIcon="@drawable/ic_kbd_numeric"
+            android:keyWidth="15%p"
+
+            />
+
+        <Key
+            android:codes="32"
+            android:isRepeatable="true"
+            android:keyIcon="@drawable/ic_kbd_space"
+            android:keyWidth="20%p" />
+
+        <!--android:codes="46,44"-->
+        <Key
+            android:codes="46"
+            android:isRepeatable="true"
+            android:keyLabel=". ,"
+            android:popupCharacters=".,?!#@"
+            android:popupKeyboard="@xml/keyboard_popup_template" />
+        <Key
+            android:codes="10"
+            android:keyEdgeFlags="right"
+            android:keyIcon="@drawable/ic_kbd_enter"
+            android:keyWidth="15%p" />
+    </Row>
+</Keyboard>
+    

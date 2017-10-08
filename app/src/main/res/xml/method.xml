@@ -22,7 +22,7 @@
     android:settingsActivity="com.jeykeu.awertykeyboard.ImePreferences"
     android:supportsSwitchingToNextInputMethod="true">
     <subtype
-        android:icon="@drawable/icon_bal"
+        android:icon="@drawable/ic_kbd_space_label"
         android:imeSubtypeLocale="bal"
         android:imeSubtypeMode="keyboard"
         android:label="@string/label_subtype_bal" />
@@ -30,11 +30,6 @@
         android:icon="@drawable/icon_en_us"
         android:imeSubtypeLocale="en_Us"
         android:imeSubtypeMode="keyboard"
-        android:label="@string/label_subtype_en_GB" />
-    <subtype
-        android:icon="@drawable/icon_en_gb"
-        android:imeSubtypeLocale="en_GB"
-        android:imeSubtypeMode="keyboard"
-        android:label="@string/label_subtype_en_GB" />
+        android:label="@string/label_subtype_en_US" />
 
 </input-method>
